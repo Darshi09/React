@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Card = () => {
+const Card = ({ bool }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -20,17 +20,26 @@ const Card = () => {
   }, []);
 
   return (
-    <>
-      <h1 className="text-center font-extrabold text-6xl mt-10 mb-6 ">
+    <div>
+      <h1
+        className={`${
+          bool ? "text-white" : "bg-black-900"
+        } text-5xl font-bold text-center my-8`}
+      >
         PRODUCTS
       </h1>
+
       {loading && <p className="text-center text-xl font-medium">Loading...</p>}
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-10 pb-20">
         {data.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-lg shadow-md border border-gray-200 p-4 flex flex-col hover:shadow-lg transition-shadow duration-300"
+            className={`rounded-lg shadow-md border p-4 flex flex-col hover:shadow-lg transition-shadow duration-300 ${
+              bool
+                ? "bg-black-900 text-white border-gray-700"
+                : "bg-white text-gray-900 border-gray-200"
+            }`}
           >
             <div className="w-full h-[250px] flex items-center justify-center mb-4">
               <img
@@ -42,29 +51,35 @@ const Card = () => {
             <h3 className="font-bold text-xl mb-2">
               {item.title.slice(0, 30)}...
             </h3>
-            <p className="text-lg font-semibold text-green-600 mb-4">
+            <p className="text-lg font-semibold text-green-500 mb-4">
               ${item.price}
             </p>
             <div className="mt-auto flex justify-between gap-2">
               <button
                 type="button"
-                className="flex-1 border border-gray-800 text-gray-900 hover:text-white hover:bg-gray-900 focus:ring-2 focus:ring-gray-300 font-medium rounded-md text-sm px-4 py-2 transition-all"
+                className={`flex-1 border text-sm px-4 py-2 font-medium rounded-md transition-all ${
+                  bool
+                    ? "border-white text-white hover:bg-white hover:text-gray-900"
+                    : "border-gray-800 text-gray-900 hover:bg-gray-900 hover:text-white"
+                }`}
               >
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i className="fa-solid fa-cart-shopping"></i>
               </button>
-              {/* <button
+              <button
                 type="button"
-                className="flex-1 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 font-medium rounded-md text-sm px-4 py-2 transition-all"
-              > */}
-                <button type="button" className="flex-1 text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-2 focus:outline-none focus:ring-purple-300 font-medium rounded-md text-sm px-4 py-2 text-center dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
-
-                <i class="fa-solid fa-bag-shopping"></i>
+                className={`flex-1 text-sm px-4 py-2 font-medium rounded-md transition-all border text-center ${
+                  bool
+                    ? "border-purple-400 text-purple-400 hover:bg-purple-500 hover:text-white"
+                    : "border-purple-700 text-purple-700 hover:bg-purple-800 hover:text-white"
+                }`}
+              >
+                <i className="fa-solid fa-bag-shopping"></i>
               </button>
             </div>
           </div>
         ))}
       </section>
-    </>
+    </div>
   );
 };
 

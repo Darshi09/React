@@ -5,14 +5,18 @@ import Slider from './components/Slider'
 import Card from './components/Card'
 
 const App = () => {
+
+  const  [boolean,setboolean]=useState(false)
   
   return (
-    <>
-    <Navber/>
+    
+    <div style={{backgroundColor:`${boolean?"black":"white"}`, transition:"0.3s"}}>
+      <Navber bool={boolean} setbool={setboolean}/>
     {/* <Slider/> */}
-    <Card/>
-    <Footer/>
-    </>
+    <Card bool={boolean} />
+    <Footer bool={boolean} />
+    </div>
+    
   )
 }
 
